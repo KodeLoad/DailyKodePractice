@@ -8,6 +8,16 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+ struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(){}
+    ListNode(int x){}
+    ListNode(int x, ListNode *next){}
+};
+
+
 class Solution {
 public:
     ListNode* middleNode(ListNode* head)

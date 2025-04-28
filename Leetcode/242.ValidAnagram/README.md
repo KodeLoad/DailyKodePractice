@@ -3,9 +3,7 @@
 > Video description: https://youtu.be/SebhaUBbUs4
 
 
-[Problem](https://leetcode.com/problems/valid-anagram) | 
-[Java Solution](./java_solution/learn/validanagram/Soluiton.java) | 
-[Discussion](https://www.reddit.com/r/OBrutus/)
+[Problem](https://leetcode.com/problems/valid-anagram) | [Java Solution](./java_solution/learn/validanagram/Soluiton.java) | [C++ Solution](./cpp/BetterSolution.cpp) | [Discussion](https://www.reddit.com/r/OBrutus/)
 
 
 [![img](https://img.youtube.com/vi/SebhaUBbUs4/0.jpg)](https://youtu.be/SebhaUBbUs4)

@@ -1,11 +1,15 @@
+#include <vector>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals)
+    vector<vector<int> > merge(vector<vector<int> >& intervals)
     {
         // Sort
         std::sort(intervals.begin(), intervals.end());
         
-        vector<vector<int>> result;
+        vector<vector<int> > result;
         for(int index=0; index<intervals.size(); ++index)
         {
             int start=intervals[index][0];
