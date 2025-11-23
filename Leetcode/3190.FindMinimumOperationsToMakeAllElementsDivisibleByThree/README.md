@@ -3,7 +3,7 @@
 
 > Video description: https://youtu.be/JghQz-zqW-M
 
-[Problem](https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/) | [Java Solution](./Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
+[Problem](https://leetcode.com/problems/find-minimum-operations-to-make-all-elements-divisible-by-three/) | [Java Solution](./java_solution/Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
 
 [![img](https://img.youtube.com/vi/JghQz-zqW-M/0.jpg)](https://youtu.be/JghQz-zqW-M)
 
