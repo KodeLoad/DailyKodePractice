@@ -1,3 +1,4 @@
+package java_solution;
 /**
 arr size : n with k=k
 O(n*k)

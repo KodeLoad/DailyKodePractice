@@ -2,7 +2,7 @@
 ---
 > Video description: https://youtu.be/92AmZ5xF7yI
 
-[Problem](https://leetcode.com/problems/string-compression-iii/description/) | [Java Solution](./Solution.java)
+[Problem](https://leetcode.com/problems/string-compression-iii/description/) | [Java Solution](./java_solution/Solution.java)
 
 [![img](https://img.youtube.com/vi/92AmZ5xF7yI/0.jpg)](https://youtu.be/92AmZ5xF7yI)
 ---

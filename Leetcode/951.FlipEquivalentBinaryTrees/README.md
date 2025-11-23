@@ -2,7 +2,7 @@ Find the Sum of Last N nodes of the Linked List
 ---
 > Video description: https://youtu.be/Tx3_XDwwvCc
 
-[Problem](https://leetcode.com/problems/flip-equivalent-binary-trees/description/) | [Java Solution](./Solution.java)
+[Problem](https://leetcode.com/problems/flip-equivalent-binary-trees/description/) | [Java Solution](./java_solution/Solution.java)
 
 [![img](https://img.youtube.com/vi/Tx3_XDwwvCc/0.jpg)](https://youtu.be/Tx3_XDwwvCc)
 ---

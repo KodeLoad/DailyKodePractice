@@ -2,7 +2,7 @@
 ---
 > Video description: https://www.youtube.com/watch?v=hVIVXDjXB3g&list=TLPQMDYwOTIwMjTAVP0BRl59lQ&index=5&ab_channel=OBrutus
 
-[Problem](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/description/) | [Java Solution](./Solution.java)
+[Problem](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/description/) | [Java Solution](./java_solution/ListNode.java)
 
 [![img](https://img.youtube.com/vi/hVIVXDjXB3g/0.jpg)](https://www.youtube.com/watch?v=hVIVXDjXB3g&list=TLPQMDYwOTIwMjTAVP0BRl59lQ&index=5&ab_channel=OBrutus)
 ---

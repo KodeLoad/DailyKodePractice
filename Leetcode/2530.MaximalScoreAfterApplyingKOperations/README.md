@@ -4,7 +4,7 @@
 
 [![img](https://img.youtube.com/vi/Fl92ljPX2MM/0.jpg)](https://youtu.be/Fl92ljPX2MM)
 
-[JavaSolution](./Solution.java) | Feel free to contribute in your fav language
+[JavaSolution](./java_solution/Solution.java) | Feel free to contribute in your fav language
 
 Description
 ---
