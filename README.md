@@ -5,5 +5,5 @@ This is the repository for daily code practice, which consists of programs but n
 ---
 
 This includes coding platforms
-* GeeksForGeeks
-* Leetcode
+* [GeeksForGeeks](./GeeksForGeeks/)
+* [Leetcode](./Leetcode/)
