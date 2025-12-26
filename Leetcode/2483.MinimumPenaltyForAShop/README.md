@@ -1,11 +1,11 @@
 # Minimum Penalty for a Shop
 ---
 
-> Video description: https://youtu.be/ugbU7bi2rQY
+> Video description: https://youtu.be/6H3dnD5XiwM
 
 [Problem](https://leetcode.com/problems/minimum-penalty-for-a-shop/) | [Java Solution](./java_solution/Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
 
-[![img](https://img.youtube.com/vi/ugbU7bi2rQY/0.jpg)](https://youtu.be/ugbU7bi2rQY)
+[![img](https://img.youtube.com/vi/6H3dnD5XiwM/0.jpg)](https://youtu.be/6H3dnD5XiwM)
 
 ---
 
