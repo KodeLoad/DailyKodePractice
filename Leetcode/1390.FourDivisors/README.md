@@ -3,7 +3,7 @@
 
 > Video description: https://youtu.be/ahFu2fJtyd8
 
-[Problem](https://leetcode.com/problems/four-divisors/) | [Java Solution](./Solution.java) | [Discussion](https://leetcode.com/problems/four-divisors/discuss/)
+[Problem](https://leetcode.com/problems/four-divisors/) | [Java Solution](./java_solution/Solution.java) | [Discussion](https://leetcode.com/problems/four-divisors/discuss/)
 
 [![img](https://img.youtube.com/vi/ahFu2fJtyd8/0.jpg)](https://youtu.be/ahFu2fJtyd8)
 
