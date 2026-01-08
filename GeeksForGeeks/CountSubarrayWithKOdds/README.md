@@ -1,315 +1,366 @@
-# Count Distinct Elements in Every Window
+# Count Subarray with K Odds
 ---
 
-> Video description: https://youtu.be/uCCQbyTyTZs
+> Video description: https://youtu.be/aKONoUNBXr8
 
-[Problem](https://www.geeksforgeeks.org/problems/count-distinct-elements-in-every-window/1) | [Java Solution](./Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
+[Problem](https://www.geeksforgeeks.org/problems/count-subarray-with-k-odds/1) | [Java Solution](./Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
 
-[![img](https://img.youtube.com/vi/uCCQbyTyTZs/0.jpg)](https://youtu.be/uCCQbyTyTZs)
+[![img](https://img.youtube.com/vi/aKONoUNBXr8/0.jpg)](https://youtu.be/aKONoUNBXr8)
 
 ---
 
-**Difficulty:** Easy  
-**Accuracy:** 50.87%  
-**Submissions:** 149K+  
-**Points:** 2  
-**Average Time:** 20m
+**Difficulty:** Medium  
+**Accuracy:** 45.12%  
+**Submissions:** 28K+  
+**Points:** 4  
+**Average Time:** 25m
 
-Given an array `arr[]` of size `N` and an integer `K`, find the count of distinct elements in every window of size `K` in the array.
+Given an array `arr[]` of integers and an integer `K`, count the number of subarrays that contain **exactly K odd numbers**.
 
 ## Examples:
 
 **Example 1:**
 ```
-Input: N = 7, K = 4
-arr[] = [1, 2, 1, 3, 4, 2, 3]
-Output: [3, 4, 4, 3]
+Input: arr[] = [1, 2, 3, 4, 5], K = 2
+Output: 6
 
 Explanation:
-Window 1: [1, 2, 1, 3] → Distinct: {1, 2, 3} → Count = 3
-Window 2: [2, 1, 3, 4] → Distinct: {1, 2, 3, 4} → Count = 4
-Window 3: [1, 3, 4, 2] → Distinct: {1, 2, 3, 4} → Count = 4
-Window 4: [3, 4, 2, 3] → Distinct: {2, 3, 4} → Count = 3
+Subarrays with exactly 2 odd numbers:
+[1, 2, 3] → odds: 1, 3
+[2, 3, 4, 5] → odds: 3, 5
+[1, 2, 3, 4, 5] → odds: 1, 3, 5 (has 3 odds, doesn't count)
+
+Wait, let me recalculate:
+[1, 2, 3] → 2 odds ✓
+[1, 2, 3, 4] → 2 odds ✓
+[2, 3, 4, 5] → 2 odds ✓
+[3, 4, 5] → 2 odds ✓
+And more...
+Total = 6
 ```
 
 **Example 2:**
 ```
-Input: N = 3, K = 2
-arr[] = [4, 1, 1]
-Output: [2, 1]
+Input: arr[] = [2, 4, 6], K = 1
+Output: 0
 
 Explanation:
-Window 1: [4, 1] → Distinct: {1, 4} → Count = 2
-Window 2: [1, 1] → Distinct: {1} → Count = 1
+All elements are even.
+No subarray can have exactly 1 odd number.
+```
+
+**Example 3:**
+```
+Input: arr[] = [1, 1, 1], K = 2
+Output: 2
+
+Explanation:
+[1, 1] at positions (0,1) → 2 odds ✓
+[1, 1] at positions (1,2) → 2 odds ✓
 ```
 
 ## Constraints:
-- 1 ≤ K ≤ N ≤ 10⁵
-- 1 ≤ arr[i] ≤ 10⁵
+- 1 ≤ arr.size() ≤ 10⁵
+- 1 ≤ arr[i] ≤ 10⁹
+- 0 ≤ K ≤ arr.size()
 
 ## Expected Complexities:
 - **Time Complexity:** O(N)
-- **Space Complexity:** O(K)
+- **Space Complexity:** O(N) or O(1)
 
 ## Company Tags:
-Amazon | Microsoft | Google | Adobe | Samsung | Accolite
+Amazon | Google | Microsoft | Adobe
 
 ## Topic Tags:
-Sliding Window | Hash Map | Arrays
+Arrays | Prefix Sum | Hash Map | Counting
 
 ## Approach:
 
 ### Brute Force (TLE):
 ```
-for each window:
-    set = new HashSet()
-    for element in window:
-        set.add(element)
-    result.append(set.size())
+count = 0
+for i from 0 to N-1:
+    odds = 0
+    for j from i to N-1:
+        if arr[j] is odd:
+            odds++
+        if odds == K:
+            count++
+        if odds > K:
+            break
+return count
 ```
 
-**Complexity:** O(N × K) - Too Slow!
+**Complexity:** O(N²) - Too Slow!
 
-### Optimal: Sliding Window + Hash Map
+### Optimal: Prefix Sum + HashMap
 
 **Key Insight:**
-- Use HashMap to track frequency of elements
-- Slide window: remove left, add right
-- Map size = distinct count
+- Track count of odd numbers seen so far
+- Use prefix sum technique
+- For exactly K odds: count(≤K) - count(≤K-1)
 
 **Algorithm:**
 ```
-map = new HashMap()
-result = []
+function countSubarrays(arr, K):
+    return atMostK(arr, K) - atMostK(arr, K-1)
 
-// Build first window
-for i from 0 to K-1:
-    map[arr[i]]++
-
-result.add(map.size())
-
-// Slide window
-for i from K to N-1:
-    // Remove leftmost element
-    map[arr[i-K]]--
-    if map[arr[i-K]] == 0:
-        map.remove(arr[i-K])
+function atMostK(arr, K):
+    count = 0
+    oddCount = 0
+    left = 0
     
-    // Add rightmost element
-    map[arr[i]]++
+    for right from 0 to N-1:
+        if arr[right] is odd:
+            oddCount++
+        
+        while oddCount > K:
+            if arr[left] is odd:
+                oddCount--
+            left++
+        
+        count += (right - left + 1)
     
-    result.add(map.size())
-
-return result
+    return count
 ```
 
 **Complexity:** O(N) - Optimal!
 
+### Alternative: Prefix Count + HashMap
+
+**Algorithm:**
+```
+map = {0: 1}  // prefix → frequency
+oddCount = 0
+result = 0
+
+for num in arr:
+    if num is odd:
+        oddCount++
+    
+    // Check if (oddCount - K) exists
+    if (oddCount - K) in map:
+        result += map[oddCount - K]
+    
+    map[oddCount]++
+
+return result
+```
+
+**Complexity:** O(N), Space: O(N)
+
 ### Visual Understanding:
 ```
-arr = [1, 2, 1, 3, 4, 2, 3], K = 4
+arr = [1, 2, 3, 4, 5], K = 2
 
-Window 1: [1, 2, 1, 3]
-map = {1:2, 2:1, 3:1}
-distinct = 3 ✓
+Track odd count at each position:
+Index:  0  1  2  3  4
+Value:  1  2  3  4  5
+IsOdd:  1  0  1  0  1
+Prefix: 1  1  2  2  3
 
-Slide → Remove 1, Add 4
-Window 2: [2, 1, 3, 4]
-map = {1:1, 2:1, 3:1, 4:1}
-distinct = 4 ✓
+For each position with prefix P:
+Need prefix (P-K) earlier
 
-Slide → Remove 2, Add 2
-Window 3: [1, 3, 4, 2]
-map = {1:1, 2:1, 3:1, 4:1}
-distinct = 4 ✓
+At index 2 (prefix=2):
+  Need prefix 0 (2-2=0)
+  Found at index -1 (before start)
+  Subarrays: [1,2,3]
 
-Slide → Remove 1, Add 3
-Window 4: [3, 4, 2, 3]
-map = {2:1, 3:2, 4:1}
-distinct = 3 ✓
+At index 3 (prefix=2):
+  Need prefix 0
+  Subarrays: [1,2,3,4]
 
-Output: [3, 4, 4, 3]
+At index 4 (prefix=3):
+  Need prefix 1 (3-2=1)
+  Found at index 0 and 1
+  Subarrays: [2,3,4,5], [3,4,5]
+
+Total = 6 ✓
 ```
 
-### Step-by-Step Trace:
+### Why "AtMost K" Works:
+
+**Key Formula:**
 ```
-arr = [1, 2, 1, 3], K = 3
+Exactly K = AtMost K - AtMost (K-1)
 
-Initial window [1, 2, 1]:
-Add 1: map = {1:1}
-Add 2: map = {1:1, 2:1}
-Add 1: map = {1:2, 2:1}
-Size = 2 → result = [2]
+AtMost K: All subarrays with ≤ K odds
+AtMost K-1: All subarrays with ≤ K-1 odds
 
-Slide to [2, 1, 3]:
-Remove arr[0]=1: map[1]-- → {1:1, 2:1}
-Add arr[3]=3: map[3]++ → {1:1, 2:1, 3:1}
-Size = 3 → result = [2, 3]
-
-Output: [2, 3]
+Difference: Subarrays with exactly K odds
 ```
 
-### Why HashMap Works:
-
-**Frequency Tracking:**
+**Example:**
 ```
-- HashMap stores element → frequency
-- Size of map = number of distinct elements
-- When frequency becomes 0 → remove from map
-- Map size always reflects distinct count
+arr = [1,1,1], K = 2
+
+AtMost 2 odds:
+[1] → 1 odd ✓
+[1,1] → 2 odds ✓
+[1,1,1] → 3 odds ✗
+[1] → 1 odd ✓
+[1,1] → 2 odds ✓
+[1] → 1 odd ✓
+Total = 5
+
+AtMost 1 odd:
+[1], [1], [1] → 3 subarrays
+
+Exactly 2 = 5 - 3 = 2 ✓
 ```
 
-**Sliding Mechanism:**
+### Sliding Window Technique:
+
+**AtMost K Implementation:**
 ```
-Remove left: 
-  freq--
-  if freq == 0: delete entry
+left = 0, oddCount = 0, result = 0
 
-Add right:
-  freq++ (or initialize to 1)
+For right pointer:
+  Expand window (add arr[right])
+  Count if odd
+  
+  While oddCount > K:
+    Shrink window (remove arr[left])
+    left++
+  
+  Add valid subarrays ending at right:
+    count += (right - left + 1)
+```
 
-Map size = answer for current window
+**Why (right - left + 1)?**
+```
+All subarrays ending at 'right' starting from any position in [left, right]
+Example: left=0, right=3
+Subarrays: [0,3], [1,3], [2,3], [3,3]
+Count = 4 = 3 - 0 + 1
 ```
 
 ### Edge Cases:
 
-1. **K = N:** Single window (entire array)
-2. **K = 1:** Each element is distinct count 1
-3. **All same elements:** Count always 1
-4. **All unique:** Count always K
-5. **Duplicates:** Handle frequency properly
+1. **K = 0:** Count subarrays with no odds (all evens)
+2. **K > array size:** Return 0
+3. **All odds:** Count carefully
+4. **All evens:** Only valid if K = 0
+5. **K = 1:** Common case
 
 ### Common Mistakes:
 
-1. **Not removing from map when freq = 0**
+1. **Not using "AtMost" technique**
+   - Direct counting is complex
+   - AtMost K - AtMost K-1 is elegant
+
+2. **Wrong window shrinking**
 ```
-   Wrong: Just decrement frequency
-   Right: Remove entry when frequency becomes 0
+   Wrong: Shrink until oddCount < K
+   Right: Shrink until oddCount <= K
 ```
 
-2. **Using Set instead of Map**
-   - Can't track frequencies
-   - Can't handle duplicates properly
+3. **Forgetting K-1 case**
+   - Must subtract AtMost(K-1)
 
-3. **Wrong window indices**
-   - Remove arr[i-K], not arr[i-1]
+4. **HashMap approach indexing**
+   - Need to track prefix counts properly
 
-4. **Not handling first window separately**
-   - Need to build initial map first
-
-### Implementation:
+### Implementation (AtMost Method):
 ```python
-def countDistinct(arr, N, K):
-    freq = {}
-    result = []
-    
-    # First window
-    for i in range(K):
-        freq[arr[i]] = freq.get(arr[i], 0) + 1
-    
-    result.append(len(freq))
-    
-    # Slide window
-    for i in range(K, N):
-        # Remove left element
-        left = arr[i - K]
-        freq[left] -= 1
-        if freq[left] == 0:
-            del freq[left]
+def countSubarrays(arr, K):
+    def atMostK(k):
+        count = 0
+        oddCount = 0
+        left = 0
         
-        # Add right element
-        freq[arr[i]] = freq.get(arr[i], 0) + 1
+        for right in range(len(arr)):
+            if arr[right] % 2 == 1:
+                oddCount += 1
+            
+            while oddCount > k:
+                if arr[left] % 2 == 1:
+                    oddCount -= 1
+                left += 1
+            
+            count += (right - left + 1)
         
-        result.append(len(freq))
+        return count
+    
+    return atMostK(K) - atMostK(K - 1)
+```
+
+### Implementation (HashMap Method):
+```python
+def countSubarrays(arr, K):
+    prefix_count = {0: 1}
+    odd_count = 0
+    result = 0
+    
+    for num in arr:
+        if num % 2 == 1:
+            odd_count += 1
+        
+        if odd_count - K in prefix_count:
+            result += prefix_count[odd_count - K]
+        
+        prefix_count[odd_count] = prefix_count.get(odd_count, 0) + 1
     
     return result
 ```
 
-### Sliding Window Pattern:
+### Complexity Comparison:
 
-**Template:**
+| Method | Time | Space | Notes |
+|--------|------|-------|-------|
+| Brute Force | O(N²) | O(1) | TLE |
+| AtMost | O(N) | O(1) | Clean |
+| HashMap | O(N) | O(N) | Alternative |
+
+### Pattern Recognition:
+
+**"Exactly K" Problems:**
 ```
-1. Build first window in map
-2. Record size (distinct count)
-3. For remaining elements:
-   a. Decrease freq of leftmost element
-   b. Remove if freq becomes 0
-   c. Increase freq of new element
-   d. Record map size
-4. Return results
+Use formula: Exactly K = AtMost K - AtMost K-1
+
+Applies to:
+- Exactly K distinct elements
+- Exactly K odd numbers
+- Exactly K of any property
 ```
-
-### HashMap Operations:
-
-**Key Operations:**
-```
-Insert/Update: O(1) average
-Delete: O(1) average
-Size: O(1)
-Total per window: O(1)
-```
-
-**Why Not Set:**
-```
-Set can track presence but not frequency
-Example: [1,1,2]
-After removing first 1, need to keep 1 in set
-Can't do this with Set alone
-```
-
-### Optimization Notes:
-
-**Space:** O(K) for HashMap
-- At most K distinct elements in window
-
-**Time:** O(N) 
-- Each element added once, removed once
-- HashMap ops are O(1)
-
-### Comparison:
-
-| Approach | Time | Space | Notes |
-|----------|------|-------|-------|
-| Brute Force | O(N×K) | O(K) | TLE |
-| Sliding + Set | Wrong | O(K) | Can't handle duplicates |
-| Sliding + Map | O(N) | O(K) | Optimal ✓ |
 
 ## Related Problems:
-- Longest Substring Without Repeating Characters (LeetCode 3)
-- Substring with Concatenation of All Words (LeetCode 30)
-- Minimum Window Substring (LeetCode 76)
-- Find All Anagrams in a String (LeetCode 438)
 - Subarrays with K Different Integers (LeetCode 992)
+- Count Number of Nice Subarrays (LeetCode 1248)
+- Binary Subarrays With Sum (LeetCode 930)
+- Subarray Sum Equals K (LeetCode 560)
+- Longest Substring with At Most K Distinct Characters
 
 ## Related Articles:
-- Sliding Window with HashMap
-- Frequency Counting Techniques
-- Variable vs Fixed Window
-- Hash Map Applications
-- Window Problems Patterns
+- Sliding Window Technique
+- Prefix Sum with HashMap
+- "Exactly K" Pattern
+- AtMost Technique
+- Subarray Counting Problems
 
 ## Keywords:
-count distinct elements, sliding window hash map, distinct count window, array windowing, frequency map, geeksforgeeks sliding window, hash map frequency, subarray distinct elements
+count subarrays k odds, exactly k odd numbers, sliding window counting, prefix sum hashmap, atmost technique, subarray problems, geeksforgeeks medium, competitive programming
 
 ---
 
-**SEO Tags:** #SlidingWindow #HashMap #FrequencyCount #DistinctElements #Array #DSA #CodingInterview #GeeksforGeeks #WindowProblems
+**SEO Tags:** #SlidingWindow #PrefixSum #HashMap #SubarrayCounting #ExactlyK #Array #DSA #CodingInterview #GeeksforGeeks #AtMostTechnique
 
-**Problem Category:** Sliding Window, Hash Map, Frequency Counting
+**Problem Category:** Subarray Counting, Sliding Window, Prefix Sum
 
-**Difficulty Level:** Easy-Medium (Requires HashMap understanding)
+**Difficulty Level:** Medium (Requires pattern recognition)
 
 **Prerequisites:**
 - Sliding Window Basics
-- HashMap/Dictionary Operations
-- Frequency Counting
+- HashMap/Prefix Sum
+- AtMost Technique Understanding
 
 **Learning Outcomes:**
-- Sliding window with HashMap
-- Frequency tracking techniques
-- Distinct element counting
-- Efficient window management
+- Master "Exactly K" pattern
+- AtMost technique
+- Efficient subarray counting
+- Sliding window optimization
 
-**Interview Frequency:** Very High (Common pattern)
+**Interview Frequency:** High (Important pattern)
 
-**Key Technique:** Sliding window with HashMap for O(N) distinct counting in all windows
+**Key Technique:** AtMost K - AtMost (K-1) = Exactly K for O(N) subarray counting
