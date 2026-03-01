@@ -3,7 +3,7 @@
 
 > Video Solution: [https://youtu.be/ezlj6_FdijY](https://youtu.be/ezlj6_FdijY)
 
-[Problem](https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/) | [Java Solution](./Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
+[Problem](https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/) | [Java Solution](./java_solution/Solution.java) | [Discussion](https://www.reddit.com/r/OBrutus/)
 
 [![img](https://img.youtube.com/vi/ezlj6_FdijY/0.jpg)](https://youtu.be/ezlj6_FdijY)
 
