@@ -1,4 +1,4 @@
-package Leetcode.66.PlusOne.java_solution;
+package Leetcode.PlusOne.java_solution;
 
 /*
    (1)
