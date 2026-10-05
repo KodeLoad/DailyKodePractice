@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# dev.to publishing config  --  EXAMPLE / TEMPLATE
+#
+#   cp .config/devto.config.example .config/devto.config
+#   then edit .config/devto.config and paste your real key
+#
+# .config/devto.config is gitignored. This .example file is safe to commit
+# because it contains no real secrets. Never put a real key in this file.
+# ---------------------------------------------------------------------------
+
+# Your DEV Community API key.
+#
+# Where to get it:
+#   1. Log in to https://dev.to
+#   2. Go to https://dev.to/settings/extensions
+#        (or: click your avatar -> Settings -> "Extensions" in the left sidebar)
+#   3. Scroll to the BOTTOM of that page, to "DEV Community API Keys"
+#   4. Type a description, e.g.  DailyKodePractice CLI
+#   5. Click "Generate API Key"
+#   6. Copy the key that appears and paste it below
+#
+# The key is shown in the list after generation, so you can copy it again later.
+# If it ever leaks, delete it on that same page and generate a new one.
+#
+DEVTO_API_KEY=paste_your_key_here
+
+
+# ---------------------------------------------------------------------------
+# Where the publisher looks for the key (in order, first match wins)
+#
+#   1.  export DEVTO_API_KEY=<key>       environment variable, good for CI
+#   2.  $DEVTO_API_KEY_FILE              path to a file holding just the key
+#   3.  .config/devto.config             this file  <-- the default
+#   4.  ~/.config/devto/config           same format, outside the repo entirely
+#
+# Prefer 4 if you would rather no secret ever sits inside a git working tree,
+# even a gitignored one:
+#   mkdir -p ~/.config/devto
+#   cp .config/devto.config.example ~/.config/devto/config
+#   chmod 600 ~/.config/devto/config
+# ---------------------------------------------------------------------------

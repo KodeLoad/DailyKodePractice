@@ -131,7 +131,9 @@ void dfs(Map<Integer,Integer> map, int ori, int cur,
 
     dfs(map, ori, adj, res, jump + 1);   // go deeper (further up the tree) FIRST
 
-    res.add(new ArrayList<>(List.of(ori, adj, jump)));   // record on the way back
+    ArrayList<Integer> list = new ArrayList<>();
+    list.add(ori); list.add(adj); list.add(jump);
+    res.add(list);                       // record on the way back
 }
 ```
 

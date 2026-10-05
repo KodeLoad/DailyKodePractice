@@ -8,3 +8,15 @@
 *.out
 
 .DS_Store
+
+# unpublished dir
+StandardQuestions/*
+
+# dev.to publishing: secrets and local state (never commit)
+# .config/devto.config.example IS committed - it holds only placeholders
+.config/devto.config
+.config/devto-ids.json
+
+# python bytecode
+__pycache__/
+*.pyc
